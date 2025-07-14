@@ -2,7 +2,7 @@ import { ConflictException, ForbiddenException, Injectable } from '@nestjs/commo
 import { DbService } from 'src/db/db.service';
 import { AuthDto } from './dto';
 import * as argon2 from "argon2"
-import { Prisma, User } from 'generated/prisma';
+import { PrismaClient } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 

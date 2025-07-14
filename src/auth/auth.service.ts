@@ -2,7 +2,7 @@ import { ConflictException, ForbiddenException, Injectable } from '@nestjs/commo
 import { DbService } from 'src/db/db.service';
 import { AuthDto } from './dto';
 import * as argon2 from "argon2"
-import { PrismaClient } from '@prisma/client';
+import { User, Prisma } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
@@ -11,11 +11,11 @@ import { ConfigService } from '@nestjs/config';
 export class AuthService {
   constructor(
     private readonly prisma: DbService,
-    private readonly jwt : JwtService,
-    private readonly config : ConfigService,
+    private readonly jwt: JwtService,
+    private readonly config: ConfigService,
   ) { }
 
-  async signIn(dto: AuthDto): Promise<{access_token : string} | null> {
+  async signIn(dto: AuthDto): Promise<{ access_token: string } | null> {
     try {
       const user = await this.prisma.user.findUnique({
         where: {
@@ -33,7 +33,7 @@ export class AuthService {
         throw new ForbiddenException("Credentials invalid!")
       }
 
-      return this.signToken(user.id,dto.email);
+      return this.signToken(user.id, dto.email);
 
     } catch (error) {
       console.log(error)
@@ -74,18 +74,18 @@ export class AuthService {
     }
   }
 
-  async signToken (userId : string , email : string ) : Promise<{access_token : string}> {
+  async signToken(userId: string, email: string): Promise<{ access_token: string }> {
     const payload = {
-      sub : userId,
-      email ,
+      sub: userId,
+      email,
     }
 
-    const token = await this.jwt.signAsync(payload,{
-      secret : this.config.get("JWT_SECRET")
+    const token = await this.jwt.signAsync(payload, {
+      secret: this.config.get("JWT_SECRET")
     });
 
     return {
-      access_token : token,
+      access_token: token,
     }
   }
 }

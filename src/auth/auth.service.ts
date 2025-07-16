@@ -6,7 +6,6 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { User, Prisma } from '@prisma/client';
 
-//import { Prisma, User } from 'generated/prisma';
 
 
 @Injectable()

@@ -14,9 +14,8 @@ export class UserService{
 
     async getMe(id : string){
         try {
-            const user = await this.prisma.user.findUnique({
+            const user = await this.prisma.user.findFirst({
                 where : {
-
                     id : id
                 },
                 select : {

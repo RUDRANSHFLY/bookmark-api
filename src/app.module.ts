@@ -16,5 +16,6 @@ import { DbService } from './db/db.service';
   imports: [BookmarkModule, AuthModule, UserModule,ConfigModule.forRoot({isGlobal : true}), DbModule],
   controllers: [AppController, AuthController,UserController],
   providers: [AppService,AuthService,UserService,DbService],
+  exports : [DbService]
 })
 export class AppModule {}

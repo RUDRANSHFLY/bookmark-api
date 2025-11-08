@@ -4,7 +4,7 @@ import { AuthDto } from './dto';
 import * as argon2 from "argon2"
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { User, Prisma } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 
 
 
